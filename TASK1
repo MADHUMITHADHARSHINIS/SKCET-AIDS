@@ -1,0 +1,300 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "toc_visible": true,
+      "authorship_tag": "ABX9TyNlJ2m5mnUhuE5mVUUiRoV0",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/MADHUMITHADHARSHINIS/SKCET-AIDS/blob/main/TASK1\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 9,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "I8TLvY2jmZO8",
+        "outputId": "567fa72e-d8ae-457b-ccec-1fec79174598"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Overwriting NumberGame.java\n"
+          ]
+        }
+      ],
+      "source": [
+        "%%writefile NumberGame.java\n",
+        "import java.util.Random;\n",
+        "import java.util.Scanner;\n",
+        "\n",
+        "public class NumberGame {\n",
+        "\n",
+        "    public static void main(String[] args) {\n",
+        "\n",
+        "        Scanner sc = new Scanner(System.in);\n",
+        "        Random rand = new Random();\n",
+        "\n",
+        "        int score = 0;\n",
+        "        boolean playAgain = true;\n",
+        "\n",
+        "        System.out.println(\"===== WELCOME TO NUMBER GAME =====\");\n",
+        "\n",
+        "        while (playAgain) {\n",
+        "\n",
+        "            int randomNumber = rand.nextInt(100) + 1; // 1 to 100\n",
+        "            int attempts = 0;\n",
+        "            int maxAttempts = 5;\n",
+        "            boolean guessedCorrectly = false;\n",
+        "\n",
+        "            System.out.println(\"\\nI have selected a number between 1 and 100.\");\n",
+        "            System.out.println(\"You have only \" + maxAttempts + \" attempts.\");\n",
+        "\n",
+        "            while (attempts < maxAttempts) {\n",
+        "\n",
+        "                System.out.print(\"\\nEnter your guess: \");\n",
+        "                int guess = sc.nextInt();\n",
+        "\n",
+        "                attempts++;\n",
+        "\n",
+        "                if (guess == randomNumber) {\n",
+        "                    System.out.println(\" Correct! You guessed the number.\");\n",
+        "                    guessedCorrectly = true;\n",
+        "\n",
+        "                    score++;\n",
+        "                    break;\n",
+        "\n",
+        "                } else if (guess < randomNumber) {\n",
+        "                    System.out.println(\" Too low!\");\n",
+        "\n",
+        "                } else {\n",
+        "                    System.out.println(\" Too high!\");\n",
+        "                }\n",
+        "\n",
+        "                System.out.println(\"Attempts left: \" + (maxAttempts - attempts));\n",
+        "            }\n",
+        "\n",
+        "            if (!guessedCorrectly) {\n",
+        "                System.out.println(\"\\n You lost!\");\n",
+        "                System.out.println(\"The correct number was: \" + randomNumber);\n",
+        "            }\n",
+        "\n",
+        "            System.out.println(\"\\nCurrent Score: \" + score);\n",
+        "\n",
+        "            System.out.print(\"\\nDo you want to play again? (yes/no): \");\n",
+        "            String choice = sc.next();\n",
+        "\n",
+        "            if (!choice.equalsIgnoreCase(\"yes\")) {\n",
+        "                playAgain = false;\n",
+        "            }\n",
+        "        }\n",
+        "\n",
+        "        System.out.println(\"\\n===== GAME OVER =====\");\n",
+        "        System.out.println(\"Final Score: \" + score);\n",
+        "\n",
+        "        sc.close();\n",
+        "    }\n",
+        "}"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "7a447d57"
+      },
+      "source": [
+        "!javac NumberGame.java"
+      ],
+      "execution_count": 10,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "ce589d99",
+        "outputId": "4d5c9102-3c86-487c-9606-a41c0e3370d2"
+      },
+      "source": [
+        "!java NumberGame"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "===== WELCOME TO NUMBER GAME =====\n",
+            "\n",
+            "I have selected a number between 1 and 100.\n",
+            "You have only 5 attempts.\n",
+            "\n",
+            "Enter your guess: 27\n",
+            " Too low!\n",
+            "Attempts left: 4\n",
+            "\n",
+            "Enter your guess: 77\n",
+            " Too high!\n",
+            "Attempts left: 3\n",
+            "\n",
+            "Enter your guess: 50\n",
+            " Too low!\n",
+            "Attempts left: 2\n",
+            "\n",
+            "Enter your guess: 60\n",
+            " Too low!\n",
+            "Attempts left: 1\n",
+            "\n",
+            "Enter your guess: 70\n",
+            " Too low!\n",
+            "Attempts left: 0\n",
+            "\n",
+            " You lost!\n",
+            "The correct number was: 71\n",
+            "\n",
+            "Current Score: 0\n",
+            "\n",
+            "Do you want to play again? (yes/no): yes\n",
+            "\n",
+            "I have selected a number between 1 and 100.\n",
+            "You have only 5 attempts.\n",
+            "\n",
+            "Enter your guess: "
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "!javac NumberGame.java"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "0hnos_Y0mu7x",
+        "outputId": "5b6268ea-aa1c-4092-ada9-85cd1c54acb2"
+      },
+      "execution_count": 2,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "error: file not found: NumberGame.java\n",
+            "Usage: javac <options> <source files>\n",
+            "use --help for a list of possible options\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "!java NumberGame\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "E0CSTMlemxbj",
+        "outputId": "f07fac3f-59b1-4e39-9fbb-8e434b774ff3"
+      },
+      "execution_count": 3,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Error: Could not find or load main class NumberGame\n",
+            "Caused by: java.lang.ClassNotFoundException: NumberGame\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "%%writefile NumberGame.java"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "_xCQIga1nXYN",
+        "outputId": "fe317d1c-2f04-40f1-c4d1-94c743d32ec8"
+      },
+      "execution_count": 4,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Writing NumberGame.java\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "!javac NumberGame.java"
+      ],
+      "metadata": {
+        "id": "BMNAM4sKna6B"
+      },
+      "execution_count": 5,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "!java NumberGame"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "EbOJ2vo1ngjJ",
+        "outputId": "d24dea6b-86de-48a1-e44a-bae8a4020e21"
+      },
+      "execution_count": 6,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Error: Could not find or load main class NumberGame\n",
+            "Caused by: java.lang.ClassNotFoundException: NumberGame\n"
+          ]
+        }
+      ]
+    }
+  ]
+}
